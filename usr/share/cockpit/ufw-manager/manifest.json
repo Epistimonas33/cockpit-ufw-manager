@@ -1,0 +1,9 @@
+{
+  "version": "0.1",
+  "tools": {
+    "ufw-manager": {
+      "label": "UFW Manager",
+      "path": "index.html"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>UFW Manager</title>
+    <script src="../base1/cockpit.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>UFW Firewall Manager</h2>
+
+    <div id="updateBanner" style="display: none;"></div>
+
+    <div id="notInstalledCard" class="card" style="display: none;">
+        <h3 style="color: #c62828;">UFW is not installed!</h3>
+        <p>The UFW (Uncomplicated Firewall) package was not found on this system.</p>
+        <button id="btnInstallUFW">Install UFW</button>
+        <div id="installStatus" style="margin-top: 10px; font-weight: bold;"></div>
+    </div>
+
+    <div id="mainContent">
+        <div class="card">
+            <h3>Status: <span id="ufwStatus" class="status-badge status-inactive">Loading...</span></h3>
+            <div class="actions-bar">
+                <button id="btnEnable">Enable</button>
+                <button id="btnDisable">Disable</button>
+                <button id="btnReload">Reload</button>
+                <button id="btnRefresh">Refresh</button>
+            </div>
+            <div id="errorBox" class="error-msg"></div>
+        </div>
+
+        <div class="card">
+            <h3>Add Rule / Port</h3>
+            <div class="form-group">
+                <input type="text" id="portInput" placeholder="e.g. 80/tcp or 22">
+                <button id="btnAdd">Add</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Active Rules</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Rule</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="rulesBody">
+                    <tr><td colspan="3">Waiting for data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

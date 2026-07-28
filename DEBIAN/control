@@ -1,0 +1,9 @@
+Package: cockpit-ufw-manager
+Version: 1.0.0
+Section: admin
+Priority: optional
+Architecture: all
+Depends: cockpit, ufw
+Maintainer: George <george@kamenka.local>
+Description: Cockpit plugin for managing UFW Firewall.
+ A simple interface for Cockpit to enable/disable UFW, reload rules, and open ports.

@@ -1,0 +1,65 @@
+body { 
+    padding: 20px; 
+    font-family: sans-serif; 
+    background: #fff; 
+}
+
+.card { 
+    background: #f8f9fa; 
+    border: 1px solid #ccc; 
+    padding: 15px; 
+    border-radius: 6px; 
+    margin-bottom: 20px; 
+}
+
+.status-badge { 
+    font-weight: bold; 
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    color: white; 
+    display: inline-block; 
+}
+
+.status-active { 
+    background-color: #2e7d32; 
+}
+
+.status-inactive { 
+    background-color: #c62828; 
+}
+
+.form-group { 
+    margin-top: 10px; 
+}
+
+input, button { 
+    padding: 8px 12px; 
+    margin-right: 5px; 
+    cursor: pointer; 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 15px; 
+}
+
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 10px; 
+    text-align: left; 
+}
+
+th { 
+    background-color: #f1f1f1; 
+}
+
+.error-msg { 
+    color: red; 
+    margin-top: 10px; 
+    font-weight: bold; 
+}
+
+.actions-bar { 
+    margin-top: 15px; 
+}
