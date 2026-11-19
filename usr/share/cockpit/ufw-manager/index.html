@@ -9,13 +9,13 @@
 <body>
     <h2>UFW Firewall Manager</h2>
 
-    <div id="updateBanner" style="display: none;"></div>
+    <div id="updateBanner"></div>
 
-    <div id="notInstalledCard" class="card" style="display: none;">
-        <h3 style="color: #c62828;">UFW is not installed!</h3>
+    <div id="notInstalledCard" class="card">
+        <h3 class="not-installed-title">UFW is not installed!</h3>
         <p>The UFW (Uncomplicated Firewall) package was not found on this system.</p>
         <button id="btnInstallUFW">Install UFW</button>
-        <div id="installStatus" style="margin-top: 10px; font-weight: bold;"></div>
+        <div id="installStatus"></div>
     </div>
 
     <div id="mainContent">
@@ -31,28 +31,122 @@
         </div>
 
         <div class="card">
-            <h3>Add Rule / Port</h3>
-            <div class="form-group">
-                <input type="text" id="portInput" placeholder="e.g. 80/tcp or 22">
+            <h3>Default Policies</h3>
+            <div class="policy-row">
+                <label>Incoming
+                    <select id="policyIncoming">
+                        <option value="" disabled>unknown</option>
+                        <option value="deny">deny</option>
+                        <option value="reject">reject</option>
+                        <option value="allow">allow</option>
+                    </select>
+                </label>
+                <label>Outgoing
+                    <select id="policyOutgoing">
+                        <option value="" disabled>unknown</option>
+                        <option value="allow">allow</option>
+                        <option value="deny">deny</option>
+                        <option value="reject">reject</option>
+                    </select>
+                </label>
+                <button id="btnApplyPolicies">Apply</button>
+            </div>
+            <div id="policyHint" class="hint"></div>
+        </div>
+
+        <div class="card">
+            <h3>Add Rule</h3>
+            <div class="rule-form">
+                <label>Action
+                    <select id="ruleAction">
+                        <option value="allow">allow</option>
+                        <option value="deny">deny</option>
+                        <option value="reject">reject</option>
+                        <option value="limit">limit</option>
+                    </select>
+                </label>
+                <label>Source IP / subnet
+                    <input type="text" id="ruleSource" placeholder="any (e.g. 192.168.1.0/24)">
+                </label>
+                <label>Port
+                    <input type="text" id="rulePort" placeholder="e.g. 22, 80/tcp, 8000:8100/tcp">
+                </label>
+                <label>Protocol
+                    <select id="ruleProto">
+                        <option value="">any</option>
+                        <option value="tcp">tcp</option>
+                        <option value="udp">udp</option>
+                    </select>
+                </label>
                 <button id="btnAdd">Add</button>
             </div>
         </div>
 
         <div class="card">
             <h3>Active Rules</h3>
+            <div class="toolbar">
+                <input type="text" id="ruleFilter" placeholder="Filter rules...">
+                <label class="inline-check"><input type="checkbox" id="groupFamilies" checked> Group IPv4/IPv6</label>
+                <button id="btnDeleteSelected" class="danger" disabled>Delete selected (0)</button>
+            </div>
             <table>
                 <thead>
                     <tr>
+                        <th class="col-check"><input type="checkbox" id="selectAll"></th>
                         <th>#</th>
-                        <th>Rule</th>
+                        <th>To</th>
                         <th>Action</th>
+                        <th>From</th>
+                        <th>Family</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="rulesBody">
-                    <tr><td colspan="3">Waiting for data...</td></tr>
+                    <tr><td colspan="7">Waiting for data...</td></tr>
                 </tbody>
             </table>
         </div>
+
+        <div class="card">
+            <h3>Listening Ports &amp; Processes</h3>
+            <div class="actions-bar">
+                <button id="btnRefreshPorts">Refresh</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Protocol</th>
+                        <th>Port</th>
+                        <th>Process</th>
+                        <th>PID</th>
+                        <th>Firewall</th>
+                    </tr>
+                </thead>
+                <tbody id="portsBody">
+                    <tr><td colspan="5">Waiting for data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+            <h3 id="modalTitle"></h3>
+            <div id="modalBody"></div>
+            <div id="modalWarning" class="modal-warning"></div>
+            <label id="modalAckRow" class="inline-check">
+                <input type="checkbox" id="modalAck"> <span id="modalAckText"></span>
+            </label>
+            <div class="modal-actions">
+                <button id="modalCancel">Cancel</button>
+                <button id="modalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a id="reportBug" href="https://github.com/Epistimonas33/cockpit-ufw-manager/issues/new" target="_blank" rel="noopener noreferrer">Report a bug</a>
+        <span id="versionLabel"></span>
     </div>
 
     <script src="index.js"></script>
